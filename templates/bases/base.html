@@ -1,0 +1,145 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<title>{% block title %}  {% endblock %}</title>
+    <meta name="keywords" content="">
+	<meta name="description" content="">
+    <meta name="author" content="templatemo">
+    <!--
+	Medigo Template
+	http://www.templatemo.com/preview/templatemo_460_medigo
+    -->
+
+	<!-- Google Fonts -->
+	<link href="http://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700itali" rel="stylesheet">
+	<link href="http://fonts.googleapis.com/css?family=Raleway:400,900,800,700,500,200,100,600" rel="stylesheet">
+
+	<!-- Stylesheets -->
+	<link rel="stylesheet" href="{% static 'bootstrap/bootstrap.css' %}">
+	<link rel="stylesheet" href="{% static 'css/misc.css' %}">
+	<link rel="stylesheet" href="{% static 'css/green-scheme.css' %}">
+
+	<!-- JavaScripts -->
+	<script src="{% static 'js/jquery-1.10.2.min.js' %}"></script>
+	<script src="{% static 'js/jquery-migrate-1.2.1.min.js' %}"></script>
+
+	<link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon" />
+
+</head>
+
+<body>
+	<div class="responsive_menu">
+        <ul class="main_menu">
+            <li><a href="index.html">Главная</a></li>
+            <li><a href="#">О нас</a>
+            	<ul>
+            		<li><a href="portfolio.html">Наша компания</a></li>
+            		<li><a href="project-image.html">Контакты</a></li>
+            		<li><a href="project-slideshow.html">Отзывы</a></li>
+            	</ul>
+            </li>
+            <li><a href="#">Карта</a>
+				<ul>
+					<li><a href="blog.html">Каталог</a></li>
+					<li><a href="blog-single.html">Добавить карту</a></li>
+                    <li><a href="#">Документация</a></li>
+				</ul>
+            </li>
+            <li><a href="archives.html">Блог-Посты</a></li>
+            <li><a href="archives.html">Поиск</a></li>
+            <li><a href="contact.html">Войти</a></li>
+        </ul> <!-- /.main_menu -->
+    </div> <!-- /.responsive_menu -->
+
+	<header class="site-header clearfix">
+		<div class="container">
+
+			<div class="row">
+
+				<div class="col-md-12">
+
+					<div class="pull-left logo">
+						<a href="index.html">
+							<img src="{% static 'images/logo.png' %}" alt="Medigo by templatemo">
+						</a>
+					</div>	<!-- /.logo -->
+
+					<div class="main-navigation pull-right">
+
+						<nav class="main-nav visible-md visible-lg">
+							<ul class="sf-menu">
+								<li class="active"><a href="index.html">Главная</a></li>
+					            <li><a href="#">О нас</a>
+					            	<ul>
+					            		<li><a href="portfolio.html">Наше компания</a></li>
+					            		<li><a href="project-image.html">Контакты</a></li>
+					            		<li><a href="project-slideshow.html">Отзывы</a></li>
+					            	</ul>
+					            </li>
+					            <li><a href="#">Карта</a>
+									<ul>
+										<li><a href="blog.html">Каталог</a></li>
+										<li><a href="blog-single.html">Добавить карту</a></li>
+                                        <li><a href="#">Документация</a></li>
+									</ul>
+					            </li>
+					            <li><a href="archives.html">Блог-Посты</a></li>
+					            <li><a href="archives.html">Поиск</a></li>
+					            <li><a href="contact.html">Войти</a></li>
+							</ul> <!-- /.sf-menu -->
+						</nav> <!-- /.main-nav -->
+
+						<!-- This one in here is responsive menu for tablet and mobiles -->
+					    <div class="responsive-navigation visible-sm visible-xs">
+					        <a href="#nogo" class="menu-toggle-btn">
+					            <i class="fa fa-bars"></i>
+					        </a>
+					    </div> <!-- /responsive_navigation -->
+
+					</div> <!-- /.main-navigation -->
+
+				</div> <!-- /.col-md-12 -->
+
+			</div> <!-- /.row -->
+
+		</div> <!-- /.container -->
+	</header> <!-- /.site-header -->
+
+
+{% block content %}    {% endblock%}
+
+
+  <footer class="site-footer">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<nav class="footer-nav clearfix">
+						<ul class="footer-menu">
+							<li><a href="index.html">Главная</a></li>
+							<li><a href="portfolio.html">О нас</a></li>
+							<li><a href="blog.html">Посты</a></li>
+							<li><a href="archives.html">API</a></li>
+							<li><a href="contact.html">Контакты</a></li>
+						</ul> <!-- /.footer-menu -->
+					</nav> <!-- /.footer-nav -->
+				</div> <!-- /.col-md-12 -->
+			</div> <!-- /.row -->
+			<div class="row">
+				<div class="col-md-12">
+					<p class="copyright-text">ИЭТ - ИКТСС
+                    | Design: Dastan</p>
+				</div> <!-- /.col-md-12 -->
+			</div> <!-- /.row -->
+		</div> <!-- /.container -->
+	</footer> <!-- /.site-footer -->
+
+	<!-- Scripts -->
+	<script src="{% static 'js/min/plugins.min.js' %}"></script>
+	<script src="{% static 'js/min/medigo-custom.min.js' %}"></script>
+
+</body>
+</html>
