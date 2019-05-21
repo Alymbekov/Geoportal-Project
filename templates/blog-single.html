@@ -1,111 +1,8 @@
-<!DOCTYPE html>
-<html lang="en-US">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<title>Medigo Green, Blog Post, free template</title>
-    <meta name="keywords" content="">
-	<meta name="description" content="">
-    <meta name="author" content="templatemo">
-    <!-- 
-	Medigo Template
-	http://www.templatemo.com/preview/templatemo_460_medigo
-    -->
-
-	<!-- Google Fonts -->
-	<link href="http://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700itali" rel="stylesheet">
-	<link href="http://fonts.googleapis.com/css?family=Raleway:400,900,800,700,500,200,100,600" rel="stylesheet">
-
-	<!-- Stylesheets -->
-	<link rel="stylesheet" href="bootstrap/bootstrap.css">
-	<link rel="stylesheet" href="css/misc.css">
-	<link rel="stylesheet" href="css/green-scheme.css">
-	
-	<!-- JavaScripts -->
-	<script src="js/jquery-1.10.2.min.js"></script>
-	<script src="js/jquery-migrate-1.2.1.min.js"></script>
-
-	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
-
-</head>
-<body>
+{% extends 'bases/base.html' %}
+{% block title %}Блог страница {% endblock %}
 
 
-	<div class="responsive_menu">
-        <ul class="main_menu">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="#">Portfolio</a>
-            	<ul>
-            		<li><a href="portfolio.html">Portfolio Grid</a></li>
-            		<li><a href="project-image.html">Project Image</a></li>
-            		<li><a href="project-slideshow.html">Project Slideshow</a></li>
-            	</ul>
-            </li>
-            <li><a href="#">Blog</a>
-				<ul>
-					<li><a href="blog.html">Blog Standard</a></li>
-					<li><a href="blog-single.html">Blog Single</a></li>
-                    <li><a href="#">visit templatemo</a></li>
-				</ul>
-            </li>
-            <li><a href="archives.html">Archives</a></li>
-            <li><a href="contact.html">Contact</a></li>
-        </ul> <!-- /.main_menu -->
-    </div> <!-- /.responsive_menu -->
-
-	<header class="site-header clearfix">
-		<div class="container">
-
-			<div class="row">
-
-				<div class="col-md-12">
-
-					<div class="pull-left logo">
-						<a href="index.html">
-							<img src="images/logo.png" alt="Medigo">
-						</a>
-					</div>	<!-- /.logo -->
-
-					<div class="main-navigation pull-right">
-
-						<nav class="main-nav visible-md visible-lg">
-							<ul class="sf-menu">
-								<li><a href="index.html">Home</a></li>
-					            <li><a href="#">Portfolio</a>
-					            	<ul>
-					            		<li><a href="portfolio.html">Portfolio Grid</a></li>
-					            		<li><a href="project-image.html">Project Image</a></li>
-					            		<li><a href="project-slideshow.html">Project Slideshow</a></li>
-					            	</ul>
-					            </li>
-					            <li class="active"><a href="#">Blog</a>
-									<ul>
-										<li><a href="blog.html">Blog Standard</a></li>
-										<li><a href="blog-single.html">Blog Single</a></li>
-                                        <li><a href="#">visit templatemo</a></li>
-									</ul>
-					            </li>
-					            <li><a href="archives.html">Archives</a></li>
-					            <li><a href="contact.html">Contact</a></li>
-							</ul> <!-- /.sf-menu -->
-						</nav> <!-- /.main-nav -->
-
-						<!-- This one in here is responsive menu for tablet and mobiles -->
-					    <div class="responsive-navigation visible-sm visible-xs">
-					        <a href="#nogo" class="menu-toggle-btn">
-					            <i class="fa fa-bars"></i>
-					        </a>
-					    </div> <!-- /responsive_navigation -->
-
-					</div> <!-- /.main-navigation -->
-
-				</div> <!-- /.col-md-12 -->
-
-			</div> <!-- /.row -->
-
-		</div> <!-- /.container -->
-	</header> <!-- /.site-header -->
-
+{% block content %}
 	<div class="first-widget parallax" id="blogId">
 		<div class="parallax-overlay">
 			<div class="container pageTitle">
@@ -121,7 +18,7 @@
 		</div> <!-- /.parallax-overlay -->
 	</div> <!-- /.pageTitle -->
 
-	<div class="container">	
+	<div class="container">
 		<div class="row">
 
 			<div class="col-md-8 blog-posts">
@@ -135,13 +32,17 @@
 								<span class="meta-date"><a href="#">24 February 2084</a></span>
 								<span class="meta-comments"><a href="#blog-comments">3 Comments</a></span>
 								<span class="meta-author"><a href="#blog-author">Candy Sharp</a></span>
-								<h3>Standard Blog Post Formating Medigo</h3>
-								<p>Sed consequat lobortis risus, in rutrum arcu tristique eget. Etiam accumsan lectus quis cursus porta.  Etiam a turpis sed sapien malesuada pellentesque quis id tortor.  Phasellus mattis quam enim, non accumsan nibh tincidunt sed.</p>
-								<p>Nostrum, quibusdam, eaque, numquam, fuga dolores libero amet suscipit in saepe optio facilis aperiam nulla iste molestiae reprehenderit facere dolorem illum ea quam incidunt est quos odio. Aperiam, repellendus, at, eaque quas eligendi ut ipsum voluptate vero fugiat molestiae labore eius similique cumque necessitatibus sequi dolore quam enim nostrum.</p>
-								<blockquote>
+								<h3>{{ objects.title }}</h3>
+                                    <p>{{ objects.description }}</p>
+                                    <p>{{ objects.description }}</p>
+                                <!--<blockquote>
 									Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi, quisquam, aut, eum, natus excepturi impedit ipsa rerum ratione id dolores ducimus minus eos quod veniam similique fugit illum error facilis!
-								</blockquote>
-								<p>Culpa, iure, debitis, exercitationem, vitae aperiam excepturi explicabo distinctio ea nisi illo temporibus dignissimos praesentium dolorem reiciendis iste officiis odio nemo dolor illum laboriosam? Architecto, earum accusamus sequi distinctio veniam amet ea quibusdam eos sapiente!</p>
+								</blockquote> -->
+								<p>
+                                    Город: {{ objects.place_name }}
+                                    Широта: {{ objects.latitude  }}
+                                    Долгота: {{ objects.longitude }}
+                                </p>
 								<div class="tag-items">
                                     <span class="small-text">Tags:</span>
                                     <a href="#" rel="tag">business</a>
@@ -159,7 +60,7 @@
                                 <img src="images/includes/author.png" alt="">
                             </a>
                             <div class="blog-author-info">
-                                <h4 class="author-name"><a href="#">Candy Sharp</a></h4>
+                                <h4 class="author-name"><a href="#">{{ objects.owner|upper }}</a></h4>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam, quod, doloremque, quia cum maiores commodi consequatur dolore et dolores omnis officiis minus dolor ex quae incidunt veritatis.</p>
                             </div>
                         </div>
@@ -176,7 +77,7 @@
                                     </div>
                                     <div class="media-body">
                                         <div class="media-heading">
-                                        	<h4>Linda Wilson</h4> 
+                                        	<h4>Linda Wilson</h4>
                                         	<a href="#"><span>4 weeks ago</span><span>Reply</span></a>
                                         </div>
                                         <p>Lorem ipsum dolor sit amet lorem, elit. Sequi, nam magni repellendus! <span class="label label-primary">New</span></p>
@@ -186,7 +87,7 @@
                                             </div>
                                             <div class="media-body">
                                                 <div class="media-heading">
-		                                        	<h4>Stephen</h4> 
+		                                        	<h4>Stephen</h4>
 		                                        	<a href="#"><span>5 weeks ago</span><span>Reply</span></a>
 		                                        </div>
                                                 <p>Temporibus, ea, praesentium eaque totam vel quos laboriosam quia sit dolore at consequatur beatae aliquam debitis porro quasi cupiditate quod!</p>
@@ -200,7 +101,7 @@
                                     </div>
                                     <div class="media-body">
                                         <div class="media-heading">
-                                        	<h4>Marco New</h4> 
+                                        	<h4>Marco New</h4>
                                         	<a href="#"><span>6 weeks ago</span><span>Reply</span></a>
                                         </div>
                                         <p>Enim, iste numquam inventore reiciendis libero quidem quos voluptate? Thank you for visiting templatemo.</p>
@@ -319,36 +220,5 @@
 			</div> <!-- /.col-md-4 -->
 
 		</div> <!-- /.row -->
-	</div> <!-- /.container -->	
-
-
-	<footer class="site-footer">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<nav class="footer-nav clearfix">
-						<ul class="footer-menu">
-							<li><a href="index.html">Home</a></li>
-							<li><a href="portfolio.html">Portfolio</a></li>
-							<li><a href="blog.html">Blog Posts</a></li>
-							<li><a href="archives.html">Shortcodes</a></li>
-							<li><a href="contact.html">Contact</a></li>
-						</ul> <!-- /.footer-menu -->
-					</nav> <!-- /.footer-nav -->
-				</div> <!-- /.col-md-12 -->
-			</div> <!-- /.row -->
-			<div class="row">
-				<div class="col-md-12">
-					<p class="copyright-text">Copyright &copy; 2084 Company Name</p>
-				</div> <!-- /.col-md-12 -->
-			</div> <!-- /.row -->
-		</div> <!-- /.container -->
-	</footer> <!-- /.site-footer -->
-
-	<!-- Scripts -->
-	<script src="js/min/plugins.min.js"></script>
-	<script src="js/min/medigo-custom.min.js"></script>
-
-
-</body>
-</html>
+	</div> <!-- /.container -->
+{% endblock %}

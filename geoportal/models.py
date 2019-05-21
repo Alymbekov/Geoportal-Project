@@ -1,4 +1,6 @@
 from django.contrib.gis.db import models
+from django.urls import reverse
+from apps.users.models import User
 
 class WorldBorder(models.Model):
     # Regular Django fields corresponding to the attributes in the
@@ -21,3 +23,23 @@ class WorldBorder(models.Model):
     # Returns the string representation of the model.
     def __str__(self):
         return self.name
+
+
+class Post(models.Model):
+    owner = models.ForeignKey(User, related_name="posts", on_delete=models.CASCADE)
+    title = models.CharField(max_length=100)
+    description = models.TextField()
+    place_name = models.CharField(max_length=100)
+    longitude = models.FloatField()
+    latitude = models.FloatField()
+    tags = models.ManyToManyField('Tag', blank=True, related_name='posts')
+
+    def __str__(self):
+        return "{} + {}".format(self.owner, self.title)
+
+
+class Tag(models.Model):
+    title = models.CharField('title', max_length=100)
+
+    def __str__(self):
+        return "{}+++{}".format(self.title, self.posts)

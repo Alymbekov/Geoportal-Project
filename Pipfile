@@ -10,6 +10,8 @@ django = "*"
 psycopg2 = "*"
 gdal = "*"
 django-leaflet = "*"
+django-authtools = "*"
+celery = "==4.1.1"
 
 [requires]
 python_version = "3.6"

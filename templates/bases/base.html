@@ -17,11 +17,12 @@
 	<!-- Google Fonts -->
 	<link href="http://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700itali" rel="stylesheet">
 	<link href="http://fonts.googleapis.com/css?family=Raleway:400,900,800,700,500,200,100,600" rel="stylesheet">
-
-	<!-- Stylesheets -->
-	<link rel="stylesheet" href="{% static 'bootstrap/bootstrap.css' %}">
 	<link rel="stylesheet" href="{% static 'css/misc.css' %}">
 	<link rel="stylesheet" href="{% static 'css/green-scheme.css' %}">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<!-- Stylesheets -->
+	<link rel="stylesheet" href="{% static 'bootstrap/bootstrap.css' %}">
+
 
 	<!-- JavaScripts -->
 	<script src="{% static 'js/jquery-1.10.2.min.js' %}"></script>
@@ -34,24 +35,31 @@
 <body>
 	<div class="responsive_menu">
         <ul class="main_menu">
-            <li><a href="index.html">Главная</a></li>
+            <li><a href="{% url 'cities:index' %}">Главная</a></li>
             <li><a href="#">О нас</a>
             	<ul>
-            		<li><a href="portfolio.html">Наша компания</a></li>
-            		<li><a href="project-image.html">Контакты</a></li>
-            		<li><a href="project-slideshow.html">Отзывы</a></li>
+            		<li><a href="#">Наша компания</a></li>
+            		<li><a href="#">Контакты</a></li>
+            		<li><a href="#">Отзывы</a></li>
             	</ul>
             </li>
             <li><a href="#">Карта</a>
 				<ul>
-					<li><a href="blog.html">Каталог</a></li>
-					<li><a href="blog-single.html">Добавить карту</a></li>
+					<li><a href="#">Каталог</a></li>
+					<li><a href="#">Добавить карту</a></li>
                     <li><a href="#">Документация</a></li>
 				</ul>
             </li>
-            <li><a href="archives.html">Блог-Посты</a></li>
-            <li><a href="archives.html">Поиск</a></li>
-            <li><a href="contact.html">Войти</a></li>
+            <li><a href="{% url 'cities:blog-post' %}">Блог-Посты</a></li>
+            <li><a href="#">Поиск</a></li>
+				{% if user.is_authenticated %}
+						<li><a href="{% url 'password_change' %}">Поменять пароль</a></li>
+            <li><a href="{% url 'logout' %}">Выйти</a></li>
+								<li>{{user.username}}</li>
+				{% else %}
+						<li><a href="{% url 'signup' %}">Регистрация</a></li>
+						<li><a href="{% url 'login' %}">Войти</a></li>
+				{% endif %}
         </ul> <!-- /.main_menu -->
     </div> <!-- /.responsive_menu -->
 
@@ -64,7 +72,7 @@
 
 					<div class="pull-left logo">
 						<a href="index.html">
-							<img src="{% static 'images/logo.png' %}" alt="Medigo by templatemo">
+							<img style="height:50px;" src="{% static 'images/logo.png' %}" alt="Medigo by templatemo">
 						</a>
 					</div>	<!-- /.logo -->
 
@@ -72,24 +80,31 @@
 
 						<nav class="main-nav visible-md visible-lg">
 							<ul class="sf-menu">
-								<li class="active"><a href="index.html">Главная</a></li>
+								<li class="active"><a href="{% url 'cities:index' %}">Главная</a></li>
 					            <li><a href="#">О нас</a>
 					            	<ul>
-					            		<li><a href="portfolio.html">Наше компания</a></li>
-					            		<li><a href="project-image.html">Контакты</a></li>
-					            		<li><a href="project-slideshow.html">Отзывы</a></li>
+					            		<li><a href="#">Наше компания</a></li>
+					            		<li><a href="#">Контакты</a></li>
+					            		<li><a href="#">Отзывы</a></li>
 					            	</ul>
 					            </li>
 					            <li><a href="#">Карта</a>
 									<ul>
-										<li><a href="blog.html">Каталог</a></li>
-										<li><a href="blog-single.html">Добавить карту</a></li>
+										<li><a href="#">Каталог</a></li>
+										<li><a href="#">Добавить карту</a></li>
                                         <li><a href="#">Документация</a></li>
 									</ul>
 					            </li>
-					            <li><a href="archives.html">Блог-Посты</a></li>
-					            <li><a href="archives.html">Поиск</a></li>
-					            <li><a href="contact.html">Войти</a></li>
+					            <li><a href="{% url 'cities:blog-post' %}">Блог-Посты</a></li>
+					            <li><a href="#">Поиск</a></li>
+											{% if user.is_authenticated %}
+													<li><a href="{% url 'password_change' %}">Поменять пароль</a></li>
+							            <li><a href="{% url 'logout' %}">Выйти</a></li>
+															<li>{{user.username}}</li>
+											{% else %}
+													<li><a href="{% url 'signup' %}">Регистрация</a></li>
+													<li><a href="{% url 'login' %}">Войти</a></li>
+											{% endif %}
 							</ul> <!-- /.sf-menu -->
 						</nav> <!-- /.main-nav -->
 
@@ -112,18 +127,31 @@
 
 {% block content %}    {% endblock%}
 
-
+<style media="screen">
+  .card {
+    margin-top:150px;
+    margin-bottom:100px;
+  }
+</style>
   <footer class="site-footer">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
 					<nav class="footer-nav clearfix">
 						<ul class="footer-menu">
-							<li><a href="index.html">Главная</a></li>
-							<li><a href="portfolio.html">О нас</a></li>
-							<li><a href="blog.html">Посты</a></li>
-							<li><a href="archives.html">API</a></li>
-							<li><a href="contact.html">Контакты</a></li>
+							<li><a href="{% url 'cities:index' %}">Главная</a></li>
+							<li><a href="#">О нас</a></li>
+							<li><a href="{% url 'cities:blog-post' %}">Посты</a></li>
+							<li><a href="#">API</a></li>
+							<li><a href="#">Контакты</a></li>
+							{% if user.is_authenticated %}
+									<li>{{user.username}}</li>
+									<li><a href="{% url 'password_change' %}">Поменять пароль</a></li>
+									<li><a href="{% url 'logout' %}">Выйти</a></li>
+							{% else %}
+									<li><a href="{% url 'signup' %}">Регистрация</a></li>
+									<li><a href="{% url 'login' %}">Войти</a></li>
+							{% endif %}
 						</ul> <!-- /.footer-menu -->
 					</nav> <!-- /.footer-nav -->
 				</div> <!-- /.col-md-12 -->

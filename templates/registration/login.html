@@ -6,17 +6,20 @@
 <div class="row justify-content-center">
   <div class="col-6 ">
     <div class="card">
-        <div class="card-body " >
-          <h2>Sign Up</h2>
+        <div class="card-body">
+          <h2>Log in</h2>
           <form action="" method="post" novalidate>
             {% csrf_token %}
             {{ form|crispy }}
-            <center><button type="submit" class="btn btn-primary justify-content-center">Регистрация</button></center>
-
+            <button type="submit" class="btn btn-primary">Log in</button>
+              <a href="{% url 'password_reset' %}" class="btn btn-link"> Forgot your password ?</a>
           </form>
+      </div>
 
     </div>
 
   </div>
 </div>
-{% endblock %}
+
+
+  {% endblock %}

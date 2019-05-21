@@ -7,7 +7,7 @@ http://www.templatemo.com/preview/templatemo_460_medigo
 */
 
 /*------------------------------------------------------
-	BASIC STYLES 
+	BASIC STYLES
 --------------------------------------------------------*/
 body {
   background: white;
@@ -168,7 +168,7 @@ a, a:visited {
 }
 
 /*------------------------------------------------------
-	HEADER STYLES 
+	HEADER STYLES
 --------------------------------------------------------*/
 .site-header {
   position: fixed;
@@ -303,7 +303,7 @@ a.menu-toggle-btn i {
 }
 
 /*------------------------------------------------------
-	General Styling 
+	General Styling
 --------------------------------------------------------*/
 .light-content {
   background-color: white;
@@ -533,7 +533,7 @@ blockquote {
 }
 
 /*------------------------------------------------------
-	Call To Action 
+	Call To Action
 --------------------------------------------------------*/
 .cta {
   padding: 35px 0;
@@ -547,7 +547,7 @@ blockquote {
 }
 
 /*------------------------------------------------------
-	Services Styling 
+	Services Styling
 --------------------------------------------------------*/
 .service-box-wrap {
   text-align: center;
@@ -568,7 +568,7 @@ blockquote {
 }
 
 /*------------------------------------------------------
-	Portfolio Styling 
+	Portfolio Styling
 --------------------------------------------------------*/
 .portfolio {
   margin-top: 40px;
@@ -862,7 +862,7 @@ blockquote {
 }
 
 /*------------------------------------------------------
-	Testimonials Styling 
+	Testimonials Styling
 --------------------------------------------------------*/
 .testimonials-widget {
   background-color: #f1f4f5;
@@ -917,7 +917,7 @@ blockquote {
 }
 
 /*------------------------------------------------------
-	Our Team Styling 
+	Our Team Styling
 --------------------------------------------------------*/
 .member-role {
   position: absolute;
@@ -944,7 +944,7 @@ blockquote {
 }
 
 /*------------------------------------------------------
-	Blog Styling 
+	Blog Styling
 --------------------------------------------------------*/
 #blogPosts .section-header {
   margin-top: 70px;
@@ -1147,7 +1147,7 @@ blockquote {
 }
 
 /*------------------------------------------------------
-	Sidebar Styling 
+	Sidebar Styling
 --------------------------------------------------------*/
 .sidebar {
   margin-top: 100px;
@@ -1234,7 +1234,7 @@ blockquote {
 }
 
 /*------------------------------------------------------
-	Contact Page Styling 
+	Contact Page Styling
 --------------------------------------------------------*/
 .contact-wrapper h3 {
   margin: 0 0 30px 0;
@@ -1282,9 +1282,9 @@ blockquote {
 }
 
 .site-footer {
-  background-color: #f1f4f5;
+  background-color: #7f8c8d;
   padding: 100px 0;
-  color: #aaaaaa;
+  color: #ecf0f1;
   font-family: "Raleway", sans-serif;
 }
 
@@ -1310,7 +1310,7 @@ blockquote {
 }
 
 /*------------------------------------------------------
-	RESPONSIVE STYLES 
+	RESPONSIVE STYLES
 --------------------------------------------------------*/
 @media (max-width: 991px) {
   .site-header {
@@ -1345,10 +1345,10 @@ blockquote {
   }
 }
 @media (max-width: 767px) {
-  .parallax { 
-	background-position: center center !important; 
+  .parallax {
+	background-position: center center !important;
   }
-  
+
   .cta .cta-title {
     display: block;
     margin-bottom: 30px;
