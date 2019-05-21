@@ -31,13 +31,13 @@
 								</a>
 							</div> <!-- /.blog-image -->
 
-						{% for obj in object_list %}
+						{% for obj in page_object.object_list %}
 							<div class="blog-content">
 
 								<style>a , a:visited {
 									color:#aaaaaa;
 								}</style>
-								<span class="meta-date colorthis"><a href="#">{{obj.owner}}</a></span>
+								<span class="meta-date colorthis"><a href="#">{{obj.title}}</a></span>
 								<span class="meta-comments colorthis"><a href="#">14 Comments</a></span>
 								<span class="meta-author colorthis"><a href="#">{{obj.place_name}}</a></span>
 
@@ -52,24 +52,41 @@
 									<hr>
 
 
-
 							</div> <!-- /.blog-content -->
 						</div> <!-- /.post-blog -->
                     {% endfor %}
+      {% if is_paginated %}
+  <nav aria-label="..." class="mt-3">
+    <ul class="pagination">
+      <li class=" page-item {% if not previus_url %}disabled {% endif %}">
+        <a class="page-link" href="{{ previus_url }}" tabindex="-1" aria-disabled="true">Previous</a>
+      </li>
 
-					<div class="col-md-12">
-						<ul class="pages">
-							<li><a href="#" class="active">1</a></li>
-							<li><a href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#">...</a></li>
-							<li><a href="#">13</a></li>
-						</ul>
-					</div> <!-- /.col-md-12 -->
+      {% for n in page_object.paginator.page_range %}
+        {% if page_object.number == n %}
+              <li class="page-item active" aria-current="page">
+                  <a class="page-link" href="?page={{n}}">{{n}}
+                       <span class="sr-only">(current)</span>
+                   </a>
+            {% elif n > page_object.number|add:-3 and n < page_object.number|add:3 %}
+              <li class="page-item">
+                  <a class="page-link" href="?page={{ n }}">
+                                  {{n}}
+                  </a>
+              </li>
+        {% endif %}
+      {% endfor %}
+      <li class=" page-item {% if not next_url %}disabled {% endif %}">
+        <a class="page-link" href="{{ next_url }}" tabindex="-1" aria-disabled="true">next</a>
+      </li>
+    </ul>
+  </nav>
+  {% endif %}
+
 				</div> <!-- /.row -->
 			</div> <!-- /.col-md-8 -->
 
-			<div class="col-md-4">
+	<!--		<div class="col-md-4">
 				<div class="sidebar">
 					<div class="sidebar-widget">
 						<h5 class="widget-title">Recent Posts</h5>
@@ -81,7 +98,7 @@
 								<span>24 February 2084</span>
 								<h4><a href="#">Standard Post Formating Medigo</a></h4>
 							</div>
-						</div> <!-- /.last-post -->
+						</div>
 						<div class="last-post clearfix">
 							<div class="thumb pull-left">
 								<a href="#"><img src="images/includes/blogthumb2.jpg" alt=""></a>
@@ -90,7 +107,7 @@
 								<span>24 February 2084</span>
 								<h4><a href="#">Standard Post Formating Medigo</a></h4>
 							</div>
-						</div> <!-- /.last-post -->
+						</div>
 						<div class="last-post clearfix">
 							<div class="thumb pull-left">
 								<a href="#"><img src="images/includes/blogthumb3.jpg" alt=""></a>
@@ -99,8 +116,8 @@
 								<span>24 February 2084</span>
 								<h4><a href="#">Standard Post Formating Medigo</a></h4>
 							</div>
-						</div> <!-- /.last-post -->
-					</div> <!-- /.sidebar-widget -->
+						</div>
+					</div>
 					<div class="sidebar-widget">
 						<h5 class="widget-title">Categories</h5>
 						<div class="row categories">
@@ -118,23 +135,21 @@
 									<li><a href="#">Business</a></li>
 								</ul>
 							</div>
-						</div> <!-- /.row -->
-					</div> <!-- /.sidebar-widget -->
+						</div>
+					</div>
 					<div class="sidebar-widget">
 						<h5 class="widget-title">Flickr Feed</h5>
 						<ul id="flickr-feed" class="thumbs"></ul>
-					</div> <!-- /.sidebar-widget -->
+					</div>
 					<div class="sidebar-widget">
 						<h5 class="widget-title">Text Widget</h5>
 						<p class="light-text">Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Cum sociis natoque penatibus et magnis dis parturient… </p>
-					</div> <!-- /.sidebar-widget -->
-				</div> <!-- /.sidebar -->
-			</div> <!-- /.col-md-4 -->
+					</div>
+				</div>
+			</div>
 
-		</div> <!-- /.row -->
-	</div> <!-- /.container -->
-
-
-
+		</div>
+	</div> -->
+            </div></div></div>
 
 {% endblock %}
