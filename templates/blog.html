@@ -8,10 +8,10 @@
 			<div class="container pageTitle">
 				<div class="row">
 					<div class="col-md-6 col-sm-6">
-						<h2 class="page-title">Blog</h2>
+						<h2 class="page-title">Блог</h2>
 					</div> <!-- /.col-md-6 -->
 					<div class="col-md-6 col-sm-6 text-right">
-						<span class="page-location">Home / Blog</span>
+						<span class="page-location">Главная / Посты</span>
 					</div> <!-- /.col-md-6 -->
 				</div> <!-- /.row -->
 			</div> <!-- /.container -->
@@ -30,6 +30,8 @@
 									<img src="images/includes/blog1.jpg" alt="">
 								</a>
 							</div> <!-- /.blog-image -->
+                            <td><a href="{% url "cities:post-create" %}">Post Create</a></td>
+
 
 						{% for obj in page_object.object_list %}
 							<div class="blog-content">
@@ -43,10 +45,8 @@
 
 								<h1>{{obj.title}}</h1>
 
-								<p class="light-text">
-									Долгота{{obj.longitude}}
-									Широта{{obj.latitude}}</p>
-								<p>
+                                    <div id="map"></div>
+                                <p>
 									{{obj.description}}
 									<a href="{% url 'cities:blog-single' pk=obj.pk %}">Continue Reading...</a></p>
 									<hr>
@@ -150,6 +150,66 @@
 
 		</div>
 	</div> -->
+
             </div></div></div>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 300px;
+      }
+    </style>
+    <script>
+      // This example requires the Places library. Include the libraries=places
+      // parameter when you first load the API. For example:
+      // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+
+      var map;
+      var service;
+      var infowindow;
+      {% for obj in page_object.object_list %}
+      var lat = {{ obj.latitude }};
+      var lon = {{ obj.longitude }};
+      {% endfor %}
+      function initMap() {
+        var post_data = new google.maps.LatLng(lat, lon);
+
+        infowindow = new google.maps.InfoWindow();
+
+        map = new google.maps.Map(
+            document.getElementById('map'), {center: post_data, zoom: 10});
+
+        var request = {
+          query: 'Museum of Contemporary Art Australia',
+          fields: ['name', 'geometry'],
+        };
+
+        service = new google.maps.places.PlacesService(map);
+
+        service.findPlaceFromQuery(request, function(results, status) {
+          if (status === google.maps.places.PlacesServiceStatus.OK) {
+            for (var i = 0; i < results.length; i++) {
+              createMarker(results[i]);
+            }
+
+            map.setCenter(results[0].geometry.location);
+          }
+        });
+      }
+
+      function createMarker(place) {
+        var marker = new google.maps.Marker({
+          map: map,
+          position: place.geometry.location
+        });
+
+        google.maps.event.addListener(marker, 'click', function() {
+          infowindow.setContent(place.name);
+          infowindow.open(map, this);
+        });
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAs5qxtyQSLgfxc0IO9AyErN7_iCSN_xYw&libraries=places&callback=initMap" async defer></script>
+
 
 {% endblock %}

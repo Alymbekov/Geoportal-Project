@@ -8,10 +8,10 @@
 			<div class="container pageTitle">
 				<div class="row">
 					<div class="col-md-6 col-sm-6">
-						<h2 class="page-title">Blog Single</h2>
+						<h2 class="page-title">Информация о посте</h2>
 					</div> <!-- /.col-md-6 -->
 					<div class="col-md-6 col-sm-6 text-right">
-						<span class="page-location">Home / Blog Single</span>
+						<span class="page-location">Home /  Полная Информация </span>
 					</div> <!-- /.col-md-6 -->
 				</div> <!-- /.row -->
 			</div> <!-- /.container -->
@@ -40,14 +40,19 @@
 								</blockquote> -->
 								<p>
                                     Город: {{ objects.place_name }}
-                                    Широта: {{ objects.latitude  }}
-                                    Долгота: {{ objects.longitude }}
+                                    <div id="map"></div>
                                 </p>
 								<div class="tag-items">
                                     <span class="small-text">Tags:</span>
                                     <a href="#" rel="tag">business</a>
                                     <a href="#" rel="tag">html</a>
                                     <a href="#" rel="tag">education</a>
+                                    {%  if user.is_authenticated %}
+                                    <td><a href="{% url "cities:post-update" objects.id %}">Update Post</a></td>
+                                    <td><a href="{% url "cities:post-delete" objects.id %}">Delete Post</a></td>
+
+                                    {% else %}
+                                    {% endif %}
                                 </div>
 							</div> <!-- /.blog-content -->
 						</div> <!-- /.post-blog -->
@@ -221,4 +226,62 @@
 
 		</div> <!-- /.row -->
 	</div> <!-- /.container -->
+        <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 300px;
+      }
+    </style>
+    <script>
+      // This example requires the Places library. Include the libraries=places
+      // parameter when you first load the API. For example:
+      // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+
+      var map;
+      var service;
+      var infowindow;
+      var lat = {{ objects.latitude }};
+      var lon = {{ objects.longitude }};
+      function initMap() {
+        var post_data = new google.maps.LatLng(lat, lon);
+
+        infowindow = new google.maps.InfoWindow();
+
+        map = new google.maps.Map(
+            document.getElementById('map'), {center: post_data, zoom: 10});
+
+        var request = {
+          query: 'Museum of Contemporary Art Australia',
+          fields: ['name', 'geometry'],
+        };
+
+        service = new google.maps.places.PlacesService(map);
+
+        service.findPlaceFromQuery(request, function(results, status) {
+          if (status === google.maps.places.PlacesServiceStatus.OK) {
+            for (var i = 0; i < results.length; i++) {
+              createMarker(results[i]);
+            }
+
+            map.setCenter(results[0].geometry.location);
+          }
+        });
+      }
+
+      function createMarker(place) {
+        var marker = new google.maps.Marker({
+          map: map,
+          position: place.geometry.location
+        });
+
+        google.maps.event.addListener(marker, 'click', function() {
+          infowindow.setContent(place.name);
+          infowindow.open(map, this);
+        });
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAs5qxtyQSLgfxc0IO9AyErN7_iCSN_xYw&libraries=places&callback=initMap" async defer></script>
+
+
 {% endblock %}

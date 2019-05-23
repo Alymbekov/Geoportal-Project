@@ -1,8 +1,12 @@
+from django.db.models import Q
 from django.shortcuts import render
+from django.urls import reverse_lazy
+from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404
 from django.views.generic import ListView, DetailView
-from django.core.paginator import Paginator
-from django.db.models import Q
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
+
 
 from .models import WorldBorder, Post, Tag
 
@@ -30,7 +34,7 @@ def post_list(request):
     else:
         posts = Post.objects.all()
 
-    paginator = Paginator(posts,2)
+    paginator = Paginator(posts,1)
 
     page_number = request.GET.get('page',1)
     page = paginator.get_page(page_number)
@@ -55,6 +59,7 @@ def post_list(request):
 
     return render(request, 'blog.html', context=context)
 
+
 class PostDetailView(DetailView):
     template_name = 'blog-single.html'
     model = Post
@@ -64,7 +69,6 @@ class PostDetailView(DetailView):
         return render(request, self.template_name, context={'objects': obj})
 
 
-
 class TagListView(ListView):
     template_name = 'blog.html'
     model = Tag
@@ -72,3 +76,37 @@ class TagListView(ListView):
     def get(self, request):
         tag = get_object_or_404(self.model)
         return render(request, self.template_name, context={'tags': tag})
+
+
+def maps(request):
+    obj = Post.objects.get(pk=2)
+    print(obj.latitude, obj.longitude)
+    return render(request, 'blog.html', {'object': obj})
+
+
+class CreatePostView(LoginRequiredMixin, CreateView):
+    model = Post
+    template_name = 'post_create.html'
+    success_url = reverse_lazy('cities:blog-post')
+
+    fields = [
+        'owner', 'title', 'description',
+        'place_name', 'latitude', 'longitude',
+        'tags'
+    ]
+
+
+class PostUpdateView(LoginRequiredMixin, UpdateView):
+    model = Post
+    template_name = "post_update.html"
+
+    fields = [
+        'owner', 'title', 'description',
+        'place_name', 'latitude', 'longitude',
+        'tags'
+    ]
+
+
+class PostDeleteView(LoginRequiredMixin, DeleteView):
+    model = Post
+    template_name = "post_delete.html"
