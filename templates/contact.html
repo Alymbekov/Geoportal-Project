@@ -1,111 +1,6 @@
-<!DOCTYPE html>
-<html lang="en-US">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<title>Medigo Green, Contact page</title>
-    <meta name="keywords" content="">
-	<meta name="description" content="">
-    <meta name="author" content="templatemo">
-    <!-- 
-	Medigo Template
-	http://www.templatemo.com/preview/templatemo_460_medigo
-    -->
-
-	<!-- Google Fonts -->
-	<link href="http://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700itali" rel="stylesheet">
-	<link href="http://fonts.googleapis.com/css?family=Raleway:400,900,800,700,500,200,100,600" rel="stylesheet">
-
-	<!-- Stylesheets -->
-	<link rel="stylesheet" href="bootstrap/bootstrap.css">
-	<link rel="stylesheet" href="css/misc.css">
-	<link rel="stylesheet" href="css/green-scheme.css">
-	
-	<!-- JavaScripts -->
-	<script src="js/jquery-1.10.2.min.js"></script>
-	<script src="js/jquery-migrate-1.2.1.min.js"></script>
-
-	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
-
-</head>
-<body>
-
-
-	<div class="responsive_menu">
-        <ul class="main_menu">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="#">Portfolio</a>
-            	<ul>
-            		<li><a href="portfolio.html">Portfolio Grid</a></li>
-            		<li><a href="project-image.html">Project Image</a></li>
-            		<li><a href="project-slideshow.html">Project Slideshow</a></li>
-            	</ul>
-            </li>
-            <li><a href="#">Blog</a>
-				<ul>
-					<li><a href="blog.html">Blog Standard</a></li>
-					<li><a href="blog-single.html">Blog Single</a></li>
-                    <li><a href="#">visit templatemo</a></li>
-				</ul>
-            </li>
-            <li><a href="archives.html">Archives</a></li>
-            <li><a href="contact.html">Contact</a></li>
-        </ul> <!-- /.main_menu -->
-    </div> <!-- /.responsive_menu -->
-
-	<header class="site-header clearfix">
-		<div class="container">
-
-			<div class="row">
-
-				<div class="col-md-12">
-
-					<div class="pull-left logo">
-						<a href="index.html">
-							<img src="images/logo.png" alt="Medigo">
-						</a>
-					</div>	<!-- /.logo -->
-
-					<div class="main-navigation pull-right">
-
-						<nav class="main-nav visible-md visible-lg">
-							<ul class="sf-menu">
-								<li><a href="index.html">Home</a></li>
-					            <li><a href="#">Portfolio</a>
-					            	<ul>
-					            		<li><a href="portfolio.html">Portfolio Grid</a></li>
-					            		<li><a href="project-image.html">Project Image</a></li>
-					            		<li><a href="project-slideshow.html">Project Slideshow</a></li>
-					            	</ul>
-					            </li>
-					            <li><a href="#">Blog</a>
-									<ul>
-										<li><a href="blog.html">Blog Standard</a></li>
-										<li><a href="blog-single.html">Blog Single</a></li>
-                                        <li><a href="#">visit templatemo</a></li>
-									</ul>
-					            </li>
-					            <li><a href="archives.html">Archives</a></li>
-					            <li class="active"><a href="contact.html">Contact</a></li>
-							</ul> <!-- /.sf-menu -->
-						</nav> <!-- /.main-nav -->
-
-						<!-- This one in here is responsive menu for tablet and mobiles -->
-					    <div class="responsive-navigation visible-sm visible-xs">
-					        <a href="#nogo" class="menu-toggle-btn">
-					            <i class="fa fa-bars"></i>
-					        </a>
-					    </div> <!-- /responsive_navigation -->
-
-					</div> <!-- /.main-navigation -->
-
-				</div> <!-- /.col-md-12 -->
-
-			</div> <!-- /.row -->
-
-		</div> <!-- /.container -->
-	</header> <!-- /.site-header -->
-
+{% extends 'bases/base.html' %}
+{% load static %}
+{% block content %}
 	<div class="first-widget parallax" id="contact">
 		<div class="parallax-overlay">
 			<div class="container pageTitle">
@@ -121,7 +16,7 @@
 		</div> <!-- /.parallax-overlay -->
 	</div> <!-- /.pageTitle -->
 
-	<div class="container">	
+	<div class="container">
 		<div class="row">
 
 			<div class="col-md-8 blog-posts">
@@ -251,56 +146,53 @@
 			</div> <!-- /.col-md-4 -->
 
 		</div> <!-- /.row -->
-	</div> <!-- /.container -->	
+	</div> <!-- /.container -->
 
-	<footer class="site-footer">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<nav class="footer-nav clearfix">
-						<ul class="footer-menu">
-							<li><a href="index.html">Home</a></li>
-							<li><a href="portfolio.html">Portfolio</a></li>
-							<li><a href="blog.html">Blog Posts</a></li>
-							<li><a href="archives.html">Shortcodes</a></li>
-							<li><a href="contact.html">Contact</a></li>
-						</ul> <!-- /.footer-menu -->
-					</nav> <!-- /.footer-nav -->
-				</div> <!-- /.col-md-12 -->
-			</div> <!-- /.row -->
-			<div class="row">
-				<div class="col-md-12">
-					<p class="copyright-text">Copyright &copy; 2084 Company Name</p>
-				</div> <!-- /.col-md-12 -->
-			</div> <!-- /.row -->
-		</div> <!-- /.container -->
-	</footer> <!-- /.site-footer -->
-
-	<!-- Scripts -->
-	<script src="js/min/plugins.min.js"></script>
-	<script src="js/min/medigo-custom.min.js"></script>
 	<script>
-        function initialize() {
-          var mapOptions = {
-            zoom: 14,
-            center: new google.maps.LatLng(13.758468, 100.567481)
-          };
+	var map;
+	var service;
+	var infowindow;
+	var lat = 42.8700000;
+	var lon = 74.5900000;
+	function initMap() {
+		var post_data = new google.maps.LatLng(lat, lon);
 
-          var map = new google.maps.Map(document.getElementById('map-canvas'),
-              mapOptions);
-        }
+		infowindow = new google.maps.InfoWindow();
 
-        function loadScript() {
-          var script = document.createElement('script');
-          script.type = 'text/javascript';
-          script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&' +
-              'callback=initialize';
-          document.body.appendChild(script);
-        }
+		map = new google.maps.Map(
+				document.getElementById('map-canvas'), {center: post_data, zoom: 10});
 
-        window.onload = loadScript;
-    </script>
+		var request = {
+			query: 'Museum of Contemporary Art Australia',
+			fields: ['name', 'geometry'],
+		};
+
+		service = new google.maps.places.PlacesService(map);
+
+		service.findPlaceFromQuery(request, function(results, status) {
+			if (status === google.maps.places.PlacesServiceStatus.OK) {
+				for (var i = 0; i < results.length; i++) {
+					createMarker(results[i]);
+				}
+
+				map.setCenter(results[0].geometry.location);
+			}
+		});
+	}
+
+	function createMarker(place) {
+		var marker = new google.maps.Marker({
+			map: map,
+			position: place.geometry.location
+		});
+
+		google.maps.event.addListener(marker, 'click', function() {
+			infowindow.setContent(place.name);
+			infowindow.open(map, this);
+		});
+	}
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAs5qxtyQSLgfxc0IO9AyErN7_iCSN_xYw&libraries=places&callback=initMap" async defer></script>
 
 
-</body>
-</html>
+{% endblock %}

@@ -14,6 +14,9 @@ app_name = 'cities'
 
 urlpatterns = [
     path('', views.index, name="index"),
+    path('about/', views.about, name="about"),
+    path('contact/', views.contact, name="contact"),
+    path('search/', views.search, name="search"),
     path('blog-post/', post_list, name="blog-post"),
     path('blog-post/<int:pk>/', PostDetailView.as_view(), name="blog-single"),
     path('maps/', maps, name="maps"),

@@ -8,7 +8,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
 
-from .models import WorldBorder, Post, Tag
+from .models import WorldBorder, Post, Tag, Comment
 
 
 class CitiesListView(ListView):
@@ -32,7 +32,7 @@ def post_list(request):
         posts = Post.objects.filter(Q(title__icontains=search_query)| Q(body__icontains=search_query))
 
     else:
-        posts = Post.objects.all()
+        posts = Post.objects.all()[::-1]
 
     paginator = Paginator(posts,1)
 
@@ -60,6 +60,10 @@ def post_list(request):
     return render(request, 'blog.html', context=context)
 
 
+def search(request):
+    return render(request, 'archives.html', {})
+
+
 class PostDetailView(DetailView):
     template_name = 'blog-single.html'
     model = Post
@@ -84,6 +88,15 @@ def maps(request):
     return render(request, 'blog.html', {'object': obj})
 
 
+def about(request):
+    return render(request, 'portfolio.html', {})
+
+
+def contact(request):
+    return render(request, 'contact.html', {})
+
+
+
 class CreatePostView(LoginRequiredMixin, CreateView):
     model = Post
     template_name = 'post_create.html'
@@ -99,6 +112,7 @@ class CreatePostView(LoginRequiredMixin, CreateView):
 class PostUpdateView(LoginRequiredMixin, UpdateView):
     model = Post
     template_name = "post_update.html"
+    success_url = reverse_lazy('cities:blog-post')
 
     fields = [
         'owner', 'title', 'description',

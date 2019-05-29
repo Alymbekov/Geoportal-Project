@@ -74,7 +74,8 @@
 				<div class="row">
 					<div class="col-md-12">
                         <div id="blog-comments" class="blog-post-comments">
-                            <h3>3 Comments</h3>
+													{% for comment in objects.comments.all %}
+								            <h3>3 Comment</h3>
                             <div class="blog-comments-content">
                                 <div class="media">
                                     <div class="pull-left">
@@ -82,43 +83,25 @@
                                     </div>
                                     <div class="media-body">
                                         <div class="media-heading">
-                                        	<h4>Linda Wilson</h4>
-                                        	<a href="#"><span>4 weeks ago</span><span>Reply</span></a>
+                                        	<h4>{{comment.author}}</h4>
+                                        	<a href="#"><span>{{comment.created_date}}</span><span>Reply</span></a>
                                         </div>
-                                        <p>Lorem ipsum dolor sit amet lorem, elit. Sequi, nam magni repellendus! <span class="label label-primary">New</span></p>
-                                        <div class="media">
-                                            <div class="pull-left">
-                                                <img class="media-object" src="images/includes/comment2.jpg" alt="">
-                                            </div>
-                                            <div class="media-body">
-                                                <div class="media-heading">
-		                                        	<h4>Stephen</h4>
-		                                        	<a href="#"><span>5 weeks ago</span><span>Reply</span></a>
-		                                        </div>
-                                                <p>Temporibus, ea, praesentium eaque totam vel quos laboriosam quia sit dolore at consequatur beatae aliquam debitis porro quasi cupiditate quod!</p>
-                                            </div>
-                                        </div>
+                                        <p>{{comment.text}} Sequi, nam magni repellendus! i, nam magni repellendus! <span class="label label-primary">New</span></p>
+
                                     </div>
                                 </div>
-                                <div class="media">
-                                    <div class="pull-left">
-                                        <img class="media-object" src="images/includes/comment3.jpg" alt="">
-                                    </div>
-                                    <div class="media-body">
-                                        <div class="media-heading">
-                                        	<h4>Marco New</h4>
-                                        	<a href="#"><span>6 weeks ago</span><span>Reply</span></a>
-                                        </div>
-                                        <p>Enim, iste numquam inventore reiciendis libero quidem quos voluptate? Thank you for visiting templatemo.</p>
-                                    </div>
-                                </div>
-                            </div> <!-- /.blog-comments-content -->
+
+														{% endfor %}
+
+													  </div> <!-- /.blog-comments-content -->
                         </div> <!-- /.blog-post-comments -->
                     </div> <!-- /.col-md-12 -->
 				</div> <!-- /.row -->
-				<div class="row">
-                    <div class="col-md-12">
-                        <div class="comment-form">
+
+
+
+
+
                             <h3>Leave a comment</h3>
                             <div class="widget-inner">
                             	<form action="#" method="post">

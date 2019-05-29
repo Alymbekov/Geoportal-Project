@@ -1,6 +1,7 @@
 from django.contrib.gis.db import models
 from django.urls import reverse
 from apps.users.models import User
+from django.utils import timezone
 
 class WorldBorder(models.Model):
     # Regular Django fields corresponding to the attributes in the
@@ -36,6 +37,23 @@ class Post(models.Model):
 
     def __str__(self):
         return "{} + {}".format(self.owner, self.title)
+
+
+class Comment(models.Model):
+    post = models.ForeignKey(Post, related_name="comments", on_delete=models.CASCADE)
+    author = models.ForeignKey(User, related_name="comments", on_delete=models.SET_NULL, null=True)
+    text = models.TextField()
+    created_date = models.DateTimeField(default=timezone.now)
+    approved_comment = models.BooleanField(default=False)
+
+
+    def approve(comment):
+        self.approved_comment = True
+        self.save()
+
+    def __str__(self):
+        return self.text
+
 
 
 class Tag(models.Model):

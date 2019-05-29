@@ -46,8 +46,8 @@
             <li><a href="{% url 'cities:index' %}">Главная</a></li>
             <li><a href="#">О нас</a>
             	<ul>
-            		<li><a href="#">Наша компания</a></li>
-            		<li><a href="#">Контакты</a></li>
+            		<li><a href="{% url 'cities:about' %}">Наша компания</a></li>
+            		<li><a href="{% url 'cities:contact' %}">Контакты</a></li>
             		<li><a href="#">Отзывы</a></li>
             	</ul>
             </li>
@@ -59,7 +59,7 @@
 				</ul>
             </li>
             <li><a href="{% url 'cities:blog-post' %}">Блог-Посты</a></li>
-            <li><a href="#">Поиск</a></li>
+            <li><a href="{% url 'cities:search' %}">Поиск</a></li>
 				{% if user.is_authenticated %}
 						<li><a href="{% url 'password_change' %}">Поменять пароль</a></li>
             <li><a href="{% url 'logout' %}">Выйти</a></li>
@@ -91,8 +91,8 @@
 								<li class="active"><a href="{% url 'cities:index' %}">Главная</a></li>
 					            <li><a href="#">О нас</a>
 					            	<ul>
-					            		<li><a href="#">Наше компания</a></li>
-					            		<li><a href="#">Контакты</a></li>
+					            		<li><a href="{% url 'cities:about' %}">Наше компания</a></li>
+					            		<li><a href="{% url 'cities:contact' %}">Контакты</a></li>
 					            		<li><a href="#">Отзывы</a></li>
 					            	</ul>
 					            </li>
@@ -100,11 +100,11 @@
 									<ul>
 										<li><a href="#">Каталог</a></li>
 										<li><a href="#">Добавить карту</a></li>
-                                        <li><a href="#">Документация</a></li>
+                    <li><a href="#">Документация</a></li>
 									</ul>
 					            </li>
 					            <li><a href="{% url 'cities:blog-post' %}">Блог-Посты</a></li>
-					            <li><a href="#">Поиск</a></li>
+					            <li><a href="{% url 'cities:search' %}">Поиск</a></li>
 											{% if user.is_authenticated %}
 													<li><a href="{% url 'password_change' %}">Поменять пароль</a></li>
 							            <li><a href="{% url 'logout' %}">Выйти</a></li>
@@ -180,6 +180,7 @@
 	<!-- Scripts -->
 	<script src="{% static 'js/min/plugins.min.js' %}"></script>
 	<script src="{% static 'js/min/medigo-custom.min.js' %}"></script>
+
 
 </body>
 </html>
