@@ -7,10 +7,10 @@
 			<div class="container pageTitle">
 				<div class="row">
 					<div class="col-md-6 col-sm-6">
-						<h2 class="page-title">Archives</h2>
+						<h2 class="page-title">Поиск</h2>
 					</div> <!-- /.col-md-6 -->
 					<div class="col-md-6 col-sm-6 text-right">
-						<span class="page-location">Home / Archives</span>
+						<span class="page-location">Home / Поиск</span>
 					</div> <!-- /.col-md-6 -->
 				</div> <!-- /.row -->
 			</div> <!-- /.container -->
@@ -22,27 +22,41 @@
 
 
 	<div class="container" style="margin-top: 100px;">
-		<h1>hello</h1>
+		<h1>Искать</h1>
 
 
-<form  class="search-box" action="">
+<form  class="search-box" action="{% url 'cities:search' %}">
+	{% csrf_token %}
 	<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
 	<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 </form>
 
 
+{% if user.is_authenticated %}
+<td><a href="{% url "cities:post-create" %}">Post Create</a></td>
+{% endif %}
+
+{% for obj in results %}
+<div class="blog-content" style="margin-top: 100px; margin-left: 100px;">
+
+	<style>a , a:visited {
+		color:#aaaaaa;
+	}</style>
+	<span class="meta-date colorthis"><a href="#">{{obj.title}}</a></span>
+	<span class="meta-comments colorthis"><a href="{% url 'cities:blog-single' pk=obj.pk %}">Комментарии: {{ obj.approved_comments.count }}</a>></span>
+	<span class="meta-author colorthis"><a href="#">{{obj.place_name}}</a></span>
+
+	<h1>{{obj.title}}</h1>
+
+		<div id="map"></div>
+	<p>
+		{{obj.description}}
+		<button class="btn btn-primary"><a href="{% url 'cities:blog-single' pk=obj.pk %}">Продолжить читать...</a></p></button>
+		<hr>
+
+
 </div>
 	</div> <!-- /.container -->
-
-<script>
-
-$(".btn").click(function(){
-  $(".input").toggleClass("active").focus;
-  $(this).toggleClass("animate");
-  $(".input").val("");
-});
-
-
-</script>
+{% endfor %}
 
 {% endblock %}

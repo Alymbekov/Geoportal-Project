@@ -1,3 +1,7 @@
+{% load leaflet_tags %}
+{% leaflet_css %}
+{% leaflet_js %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,9 +11,24 @@
   <title>Document</title>
 </head>
 <body>
+
 {% for x in object_list %}
-  {{x.name}}
-  {{x.mpoly}}
+ <h1> {{x.name}} </h1>
+<div id="#map">
+   {% leaflet_map "main" callback="map_init" %}
+</div>
+<div>
+<script>
+  function map_init(map, options) {
+      // get point lat and lon
+      var lon = "{{x.lon}}";
+      var lat = "{{x.lat}}";
+      // zoom to point & add it to map
+      map.setView([lat, lon], 14);
+      L.marker([lat, lon]).addTo(map);
+  }
+</script>
+</div>
 {% endfor %}
 
 </body>

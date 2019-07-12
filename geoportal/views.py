@@ -1,14 +1,16 @@
 from django.db.models import Q
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
+from geoportal.forms import CommentForm, DocumentForm
 from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404
 from django.views.generic import ListView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
 
-from .models import WorldBorder, Post, Tag, Comment
+from .models import WorldBorder, Post, Tag, Comment, GetFile
 
 
 class CitiesListView(ListView):
@@ -19,6 +21,27 @@ class CitiesListView(ListView):
 class CitiesDetailView(DetailView):
     template_name = 'cities/city-detail.html'
     model = WorldBorder
+
+# class CitiesCreateView(CreateView):
+#     template_name = 'cities/city-create.html'
+#     model = GetFile    
+#     success_url = reverse_lazy('cities:city-list')
+
+#     fields = [
+#         'title','file',    
+#     ]
+
+def model_form_upload(request):
+    if request.method == 'POST':
+        form = DocumentForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('index')
+    else:
+        form = DocumentForm()
+    return render(request, 'model_form_upload.html', {
+        'form': form
+    })
 
 
 def index(request):
@@ -61,7 +84,13 @@ def post_list(request):
 
 
 def search(request):
-    return render(request, 'archives.html', {})
+    search_query = request.GET.get('search', '')
+
+    if search_query:
+        posts = Post.objects.filter(Q(title__icontains=search_query)| Q(place_name__icontains=search_query))
+    else:
+        posts = Post.objects.all()
+    return render(request, 'archives.html', {'results': posts})
 
 
 class PostDetailView(DetailView):
@@ -95,6 +124,33 @@ def about(request):
 def contact(request):
     return render(request, 'contact.html', {})
 
+
+def add_comment_to_post(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.post = post
+            comment.save()
+            return redirect('cities:blog-single', pk=post.pk)
+    else:
+        form = CommentForm()
+    return render(request, 'add_comment_to_post.html', {'form': form})
+
+
+@login_required
+def comment_approve(request, pk):
+    comment = get_object_or_404(Comment, pk=pk)
+    comment.approve()
+    return redirect('cities:blog-single', pk=comment.post.pk)
+
+
+@login_required
+def comment_remove(request, pk):
+    comment = get_object_or_404(Comment, pk=pk)
+    comment.delete()
+    return redirect('cities:blog-single', pk=comment.post.pk)
 
 
 class CreatePostView(LoginRequiredMixin, CreateView):

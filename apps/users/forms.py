@@ -1,4 +1,4 @@
-from apps.users.models import User
+from apps.users.models import User, Profile
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django import forms
 
@@ -8,10 +8,9 @@ class SignUpForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('username', 'password1', 'password2', )
-#
-# class LoginForm(AuthenticationForm):
-#     full_name = forms.CharField(max_length=50, required=True, help_text='full_name')
-#     username = forms.CharField(max_length=50, required=False, help_text='username')
-#     class Meta:
-#         model = User
-#         fields = ()
+
+
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ('location', 'bio')

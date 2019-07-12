@@ -29,9 +29,10 @@
 								<a href="blog-single.html">
 									<img src="images/includes/blog1.jpg" alt="">
 								</a>
-							</div> <!-- /.blog-image -->
-                            <td><a href="{% url "cities:post-create" %}">Post Create</a></td>
-
+              </div> <!-- /.blog-image -->
+              {% if user.is_authenticated%}
+                              <td><a href="{% url "cities:post-create" %}">Создать пост</a></td>
+                {% endif %}
 
 						{% for obj in page_object.object_list %}
 							<div class="blog-content">
@@ -40,7 +41,7 @@
 									color:#aaaaaa;
 								}</style>
 								<span class="meta-date colorthis"><a href="#">{{obj.title}}</a></span>
-								<span class="meta-comments colorthis"><a href="#">14 Comments</a></span>
+								<span class="meta-comments colorthis"><a href="{% url 'cities:blog-single' pk=obj.pk %}">Комментарии: {{ obj.approved_comments.count }}</a>></span>
 								<span class="meta-author colorthis"><a href="#">{{obj.place_name}}</a></span>
 
 								<h1>{{obj.title}}</h1>
@@ -48,7 +49,7 @@
                                     <div id="map"></div>
                                 <p>
 									{{obj.description}}
-									<a href="{% url 'cities:blog-single' pk=obj.pk %}">Continue Reading...</a></p>
+									<button class="btn btn-primary"><a href="{% url 'cities:blog-single' pk=obj.pk %}">Продолжить читать...</a></p></button>
 									<hr>
 
 
@@ -83,86 +84,17 @@
   </nav>
   {% endif %}
 
-				</div> <!-- /.row -->
-			</div> <!-- /.col-md-8 -->
-
-	<!--		<div class="col-md-4">
-				<div class="sidebar">
-					<div class="sidebar-widget">
-						<h5 class="widget-title">Recent Posts</h5>
-						<div class="last-post clearfix">
-							<div class="thumb pull-left">
-								<a href="#"><img src="images/includes/blogthumb1.jpg" alt=""></a>
-							</div>
-							<div class="content">
-								<span>24 February 2084</span>
-								<h4><a href="#">Standard Post Formating Medigo</a></h4>
-							</div>
-						</div>
-						<div class="last-post clearfix">
-							<div class="thumb pull-left">
-								<a href="#"><img src="images/includes/blogthumb2.jpg" alt=""></a>
-							</div>
-							<div class="content">
-								<span>24 February 2084</span>
-								<h4><a href="#">Standard Post Formating Medigo</a></h4>
-							</div>
-						</div>
-						<div class="last-post clearfix">
-							<div class="thumb pull-left">
-								<a href="#"><img src="images/includes/blogthumb3.jpg" alt=""></a>
-							</div>
-							<div class="content">
-								<span>24 February 2084</span>
-								<h4><a href="#">Standard Post Formating Medigo</a></h4>
-							</div>
-						</div>
-					</div>
-					<div class="sidebar-widget">
-						<h5 class="widget-title">Categories</h5>
-						<div class="row categories">
-							<div class="col-md-6">
-								<ul>
-									<li><a href="#">Standard</a></li>
-									<li><a href="#">Audio</a></li>
-									<li><a href="#">Video</a></li>
-									<li><a href="#">Branding</a></li>
-								</ul>
-							</div>
-							<div class="col-md-6">
-								<ul>
-									<li><a href="#">iOS Design</a></li>
-									<li><a href="#">Business</a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					<div class="sidebar-widget">
-						<h5 class="widget-title">Flickr Feed</h5>
-						<ul id="flickr-feed" class="thumbs"></ul>
-					</div>
-					<div class="sidebar-widget">
-						<h5 class="widget-title">Text Widget</h5>
-						<p class="light-text">Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Cum sociis natoque penatibus et magnis dis parturient… </p>
-					</div>
 				</div>
 			</div>
 
-		</div>
-	</div> -->
-
             </div></div></div>
     <style>
-      /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
+
       #map {
         height: 300px;
       }
     </style>
     <script>
-      // This example requires the Places library. Include the libraries=places
-      // parameter when you first load the API. For example:
-      // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 
       var map;
       var service;
@@ -177,7 +109,7 @@
         infowindow = new google.maps.InfoWindow();
 
         map = new google.maps.Map(
-            document.getElementById('map'), {center: post_data, zoom: 15});
+            document.getElementById('map'), {center: post_data, zoom: 20});
 
         var request = {
           query: 'Museum of Contemporary Art Australia',

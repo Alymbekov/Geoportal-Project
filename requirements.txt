@@ -1,0 +1,9 @@
+django >= 2
+psycopg2
+gdal 
+django-leaflet 
+django-authtools 
+celery 
+gunicorn==19.7.1
+psycopg2==2.7.4
+
